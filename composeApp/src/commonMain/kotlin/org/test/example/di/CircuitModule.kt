@@ -12,7 +12,7 @@ import kotlin.text.get
 fun createCircuit(): Module = module {
     createPresenterFactory { navigator, screen ->
         when (screen) {
-            is Screens.HomScreen -> HomePresenter(navigator)
+            is Screens.HomScreen -> HomePresenter(navigator, get())
             else -> throw Exception("Invalid Screen Detected! :: $screen")
         }
     }

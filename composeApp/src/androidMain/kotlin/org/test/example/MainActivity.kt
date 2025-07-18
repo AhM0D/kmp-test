@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import org.koin.compose.KoinApplication
 import org.test.example.di.createCircuit
+import org.test.example.di.networkModuleConfig
 import org.test.example.di.platformNetModule
 
 class MainActivity : ComponentActivity() {
@@ -15,14 +16,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContent {
-            KoinApplication(application = {
-                modules(
-                    platformNetModule(),
-                    createCircuit(),
-                )
-            }) {
-                App()
-            }
+            App()
         }
     }
 }

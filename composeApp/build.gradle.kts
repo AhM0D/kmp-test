@@ -47,6 +47,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.koin.compose)
+            implementation(libs.napier)
             implementation(libs.bundles.ktor)
             implementation(libs.bundles.circuit)
         }

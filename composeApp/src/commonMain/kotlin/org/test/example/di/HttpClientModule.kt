@@ -1,10 +1,8 @@
 package org.test.example.di
 
+import io.github.aakira.napier.Napier
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.plugins.auth.Auth
-import io.ktor.client.plugins.auth.providers.BearerTokens
-import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.LogLevel
@@ -14,11 +12,13 @@ import io.ktor.http.ContentType
 import io.ktor.http.URLProtocol
 import io.ktor.http.contentType
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.json.Json
 import org.koin.dsl.module
 
 fun networkModuleConfig(baseUrl: String) = module {
     single<HttpClient> {
-        createHttpClient(baseUrl, get(), get())
+        createHttpClient(baseUrl, get())
     }
 }
 
@@ -26,7 +26,6 @@ fun networkModuleConfig(baseUrl: String) = module {
 fun createHttpClient(
     baseUrl: String,
     engine: HttpClientEngine,
-    userInfoRepository: UserInfoRepository,
 ): HttpClient = HttpClient(engine) {
     install(ContentNegotiation) {
         json(Json {
@@ -36,24 +35,6 @@ fun createHttpClient(
             explicitNulls = false
         })
     }
-    install(Auth) {
-        bearer {
-            loadTokens {
-                val userInfo = userInfoRepository.getUserData()
-                if (userInfo.token.isEmpty()) {
-                    null
-                } else {
-                    BearerTokens(userInfo.token, userInfo.refreshToken)
-                }
-            }
-
-            refreshTokens {
-                // Here we have to update tokens
-                BearerTokens("", "")
-            }
-        }
-    }
-
     defaultRequest {
         url {
             host = baseUrl
