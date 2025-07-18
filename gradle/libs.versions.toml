@@ -17,6 +17,7 @@ ktor = "3.0.1"
 kotlinxSerializationJson = "1.7.3"
 koin = "1.1.0"
 circuitFoundation = "0.26.1"
+parcelize = "0.9.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -37,11 +38,13 @@ ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "kto
 ktor-client-auth = { module = "io.ktor:ktor-client-auth", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
-
+kotlin-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
 circuitx-gesture-navigation = { module = "com.slack.circuit:circuitx-gesture-navigation", version.ref = "circuitFoundation" }
 circuit-foundation = { module = "com.slack.circuit:circuit-foundation", version.ref = "circuitFoundation" }
 circuit-overlay = { module = "com.slack.circuit:circuitx-overlays", version.ref = "circuitFoundation" }
+
+parcelize = { module = "dev.icerock.moko:parcelize", version.ref = "parcelize" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -53,5 +56,5 @@ kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", versio
 
 
 [bundles]
-ktor = ["ktor-client-core", "ktor-client-content-negotiation", "ktor-client-auth", "ktor-client-logging"]
+ktor = ["ktor-client-core", "ktor-client-content-negotiation", "ktor-client-auth", "ktor-client-logging", "kotlin-serialization"]
 circuit = ["circuit-overlay", "circuit-foundation", "circuitx-gesture-navigation"]
